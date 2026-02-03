@@ -80,9 +80,9 @@ CREATE TABLE class_schedule (
         CHECK (datetime(start_time) = start_time),
     end_time DATETIME NOT NULL
         CHECK (datetime(end_time) = end_time),
+    CHECK (julianday(end_time) > julianday(start_time)),
     FOREIGN KEY (class_id) REFERENCES classes(class_id),
     FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
-
 );
 
 CREATE TABLE memberships (
@@ -105,6 +105,7 @@ CREATE TABLE attendance (
     member_id INTEGER NOT NULL,
     location_id INTEGER NOT NULL,
     check_in_time DATETIME NOT NULL
+        DEFAULT(datetime('now'))
         CHECK (datetime(check_in_time) = check_in_time),
     check_out_time DATETIME
         CHECK (datetime(check_out_time) = check_out_time),
