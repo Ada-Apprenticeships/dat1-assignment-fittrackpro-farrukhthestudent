@@ -15,7 +15,7 @@ CREATE TABLE locations (
         CHECK (opening_hours LIKE '__:__-__:__')
 );
 
-CREATE TABLE members ()
+CREATE TABLE members (
     member_id INTEGER PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
@@ -95,6 +95,7 @@ CREATE TABLE memberships (
     end_date DATE NOT NULL
         CHECK (date(end_date) = end_date),
     status VARCHAR(8) NOT NULL
+        DEFAULT 'Active'
         CHECK(status IN('Active', 'Inactive')),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
@@ -127,6 +128,7 @@ CREATE TABLE payments (
     amount DECIMAL(5,2) NOT NULL
         CHECK (amount >= 0),
     payment_date DATETIME NOT NULL
+        DEFAULT (datetime('now'))
         CHECK (datetime(payment_date) = payment_date),
     payment_method VARCHAR(20) NOT NULL
         CHECK (payment_method IN('Credit Card', 'Bank Transfer', 'PayPal')),
