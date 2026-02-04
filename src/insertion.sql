@@ -37,3 +37,24 @@ INSERT INTO equipment (
     (2, 'Elliptical Trainer',   'Cardio',     '2023-02-20', '2024-07-20', '2025-02-20', 1),
     (3, 'Smith Machine',        'Strength',   '2023-03-10', '2024-03-10', '2025-03-10', 1),
     (4, 'Dumbbell Set',         'Strength',   '2023-04-05', '2024-04-05', '2025-04-05', 2);
+
+INSERT INTO classes (class_id,name,description,capacity,duration,location_id) VALUES
+(1, 'Spin Class',   'High intensity indoor cycling',    20, 45, 1),
+(2, 'Yoga Basics',  'Beginner level yoga',              15, 60, 1),
+(3, 'HIIT',           'High Interval Intensity Training', 10, 30, 2);
+
+INSERT INTO class_schedule (schedule_id,class_id,staff_id,start_time,end_time) VALUES
+(1,  1,  2,  '2025-02-01 09:00:00',  '2025-02-01 09:45:00'),
+(2,  2,  4,  '2025-02-01 10:00:00',  '2025-02-01 11:00:00'),
+(3,  3,  2,  '2025-02-02 18:00:00',  '2025-02-02 18:30:00'),
+(7,  2,  4,  '2025-02-05 12:00:00',  '2025-02-05 13:00:00');
+
+INSERT INTO memberships (
+    membership_id, member_id, type, start_date, end_date, status
+) VALUES
+    (1, 1,  'Standard',   '2024-01-01', '2025-01-01', 'Inactive'),
+    (2, 2,  'Premium',    '2024-06-15', '2025-06-15', 'Active'  ),
+    (3, 3,  'Standard',   '2024-03-20', '2025-03-20', 'Active'  ),
+    (4, 5,  'Premium',    '2024-05-10', '2025-05-10', 'Active'  );
+
+    
