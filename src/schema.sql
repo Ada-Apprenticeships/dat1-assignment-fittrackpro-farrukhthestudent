@@ -97,6 +97,7 @@ CREATE TABLE memberships (
     status VARCHAR(8) NOT NULL
         DEFAULT 'Active'
         CHECK(status IN('Active', 'Inactive')),
+    CHECK (end_date >= start_date),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
 
@@ -111,6 +112,10 @@ CREATE TABLE attendance (
         CHECK (
                 check_out_time IS NULL
                 OR datetime(check_out_time) = check_out_time
+            ),
+    CHECK (
+            check_out_time IS NULL
+            OR julianday(check_out_time) > julianday(check_in_time)
             ),
     FOREIGN KEY (member_id) REFERENCES members(member_id),
     FOREIGN KEY (location_id) REFERENCES locations(location_id)
