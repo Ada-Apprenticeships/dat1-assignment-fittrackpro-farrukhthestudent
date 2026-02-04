@@ -57,4 +57,17 @@ INSERT INTO memberships (
     (3, 3,  'Standard',   '2024-03-20', '2025-03-20', 'Active'  ),
     (4, 5,  'Premium',    '2024-05-10', '2025-05-10', 'Active'  );
 
-    
+INSERT INTO attendance (attendance_id, member_id, location_id, check_in_time, check_out_time) VALUES
+(1, 5,  1,  '2025-01-10 08:00:00',  '2025-01-10 09:30:00'),
+(2, 5,  1,  '2025-01-12 18:00:00',  '2025-01-12 19:15:00'),
+(3, 3,  1,  '2025-01-15 07:00:00',  '2025-01-15 08:00:00');
+
+INSERT INTO class_attendance (class_attendance_id,  schedule_id,    member_id,  attendance_status) VALUES
+(1,     1,  5,  'Registered'),
+(2,     1,  3,  'Attended'),
+(3,     7,  3,  'Registered'),
+(4,     3,  5,  'Registered'),
+(5,     2,  1,  'Attended'),
+(6,     2,  2,  'Registered'),
+(7,     3,  4,  'Attended'),
+(13,    7,  1,  'Attended');
