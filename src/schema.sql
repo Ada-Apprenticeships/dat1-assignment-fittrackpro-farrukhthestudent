@@ -174,7 +174,8 @@ CREATE TABLE payments (
             payment_method IN (
                 'Credit Card', 
                 'Bank Transfer', 
-                'PayPal'
+                'PayPal',
+                'Cash'
             )
         ),
     payment_type VARCHAR(30) NOT NULL 
