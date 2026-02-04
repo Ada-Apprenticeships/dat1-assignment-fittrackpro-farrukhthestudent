@@ -108,7 +108,10 @@ CREATE TABLE attendance (
         DEFAULT(datetime('now'))
         CHECK (datetime(check_in_time) = check_in_time),
     check_out_time DATETIME
-        CHECK (datetime(check_out_time) = check_out_time),
+        CHECK (
+                check_out_time IS NULL
+                OR datetime(check_out_time) = check_out_time
+            ),
     FOREIGN KEY (member_id) REFERENCES members(member_id),
     FOREIGN KEY (location_id) REFERENCES locations(location_id)
 );
