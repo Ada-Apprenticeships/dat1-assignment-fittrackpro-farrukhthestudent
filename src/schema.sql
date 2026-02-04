@@ -57,6 +57,7 @@ CREATE TABLE equipment (
     next_maintenance_date DATE NOT NULL
         CHECK (date(next_maintenance_date) = next_maintenance_date),
     location_id INTEGER NOT NULL,
+    CHECK (next_maintenance_date >= last_maintenance_date),
     FOREIGN KEY (location_id) REFERENCES locations(location_id)
 );
 
@@ -127,6 +128,7 @@ CREATE TABLE class_attendance (
     member_id INTEGER NOT NULL,
     attendance_status VARCHAR(15) NOT NULL
         CHECK (attendance_status IN('Registered', 'Attended', 'Unattended')),
+    UNIQUE (schedule_id, member_id),
     FOREIGN KEY (schedule_id) REFERENCES class_schedule(schedule_id),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
@@ -157,6 +159,7 @@ CREATE TABLE personal_training_sessions (
     end_time TEXT NOT NULL
         CHECK (time(end_time) = end_time),
     notes VARCHAR(200),
+    CHECK (time(end_time) > time(start_time)),
     FOREIGN KEY (member_id) REFERENCES members(member_id),
     FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
 );
@@ -184,7 +187,6 @@ CREATE TABLE equipment_maintenance_log (
         CHECK (date(maintenance_date) = maintenance_date),
     description TEXT, -- Description can be long on certain occasions
     staff_id INTEGER NOT NULL,
-
     FOREIGN KEY (equipment_id) REFERENCES equipment(equipment_id),
     FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
 );
