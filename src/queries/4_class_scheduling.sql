@@ -2,7 +2,7 @@
 .mode column
 
 -- 4.1 
-
+SELECT
 
 -- 4.2 
 
