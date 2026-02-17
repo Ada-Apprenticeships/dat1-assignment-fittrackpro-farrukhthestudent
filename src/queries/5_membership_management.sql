@@ -12,8 +12,9 @@ FROM
     memberships
     JOIN members ON members.member_id = memberships.member_id
 WHERE
-    status = 'Active'
-    -- 5.2 
+    status = 'Active';
+
+-- 5.2 
 SELECT
     memberships.type AS membership_type,
     ROUND(
@@ -44,4 +45,4 @@ FROM
     JOIN members ON members.member_id = memberships.member_id
 WHERE
     memberships.end_date >= '2025-01-01'
-    AND memberships.end_date < '2026-01-01'
+    AND memberships.end_date < '2026-01-01';
