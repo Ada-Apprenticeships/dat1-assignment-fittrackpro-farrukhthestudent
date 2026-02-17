@@ -3,35 +3,35 @@
 
 -- 4.1 
 SELECT
-    c.class_id,
-    c.name AS class_name,
-    s.first_name || ' ' || s.last_name AS instructor_name
+    classes.class_id,
+    classes.name AS class_name,
+    staff.first_name || ' ' || staff.last_name AS instructor_name
 FROM
-    classes c
-    JOIN class_schedule cs ON cs.class_id = c.class_id
-    JOIN staff s ON cs.staff_id = s.staff_id;
+    classes
+    JOIN class_schedule ON class_schedule.class_id = classes.class_id
+    JOIN staff ON class_schedule.staff_id = staff.staff_id;
 
 -- 4.2 
 SELECT
-    cs.class_id,
-    c.name,
-    cs.start_time,
-    cs.end_time,
-    c.capacity - COUNT(ca.class_attendance_id) as available_spots
+    class_schedule.class_id,
+    classes.name,
+    class_schedule.start_time,
+    class_schedule.end_time,
+    classes.capacity - COUNT(class_attendance.class_attendance_id) as available_spots
 FROM
-    class_schedule cs
-    JOIN classes c ON c.class_id = cs.class_id
-    JOIN staff s ON cs.staff_id = s.staff_id
-    LEFT JOIN class_attendance ca ON ca.schedule_id = cs.schedule_id
-    AND ca.attendance_status = 'Registered'
+    class_schedule
+    JOIN classes ON classes.class_id = class_schedule.class_id
+    JOIN staff ON class_schedule.staff_id = staff.staff_id
+    LEFT JOIN class_attendance ON class_attendance.schedule_id = class_schedule.schedule_id
+    AND class_attendance.attendance_status = 'Registered'
 WHERE
-    date(cs.start_time) = '2025-02-01'
+    date(class_schedule.start_time) = '2025-02-01'
 GROUP BY
-    cs.class_id,
-    c.name,
-    cs.start_time,
-    cs.end_time,
-    c.capacity;
+    class_schedule.class_id,
+    classes.name,
+    class_schedule.start_time,
+    class_schedule.end_time,
+    classes.capacity;
 
 -- 4.3 
 INSERT INTO
