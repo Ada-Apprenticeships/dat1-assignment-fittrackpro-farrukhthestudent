@@ -8,7 +8,8 @@ SELECT
     last_name,
     position AS role
 FROM
-    staff;
+    staff
+ORDER BY position, last_name, first_name;
 
 -- 7.2 
 SELECT
