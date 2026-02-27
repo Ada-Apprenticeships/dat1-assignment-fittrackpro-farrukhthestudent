@@ -2,7 +2,7 @@
 .mode column
 
 -- 4.1 
-SELECT
+SELECT DISTINCT
     classes.class_id,
     classes.name AS class_name,
     staff.first_name || ' ' || staff.last_name AS instructor_name
@@ -85,7 +85,7 @@ LIMIT
 
 -- 4.6 
 SELECT
-    ROUND(AVG(class_count), 1) AS avg_classes_per_member
+    ROUND(AVG(class_count), 2) AS avg_classes_per_member
 FROM
     (
         SELECT
