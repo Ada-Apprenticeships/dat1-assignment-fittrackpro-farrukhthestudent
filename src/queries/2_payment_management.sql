@@ -17,8 +17,7 @@ WITH months(month) AS (
     VALUES
         ('2024-11'),
         ('2024-12'),
-        ('2025-01'),
-        ('2025-02')
+        ('2025-01')
 ),
 monthly_revenue AS (
     SELECT
@@ -27,7 +26,7 @@ monthly_revenue AS (
     FROM payments
     WHERE payment_type = 'Monthly membership fee'
       AND payment_date >= '2024-11-01'
-      AND payment_date <  '2025-03-01'
+      AND payment_date <  '2025-02-01'
     GROUP BY strftime('%Y-%m', payment_date)
 )
 SELECT
@@ -41,7 +40,7 @@ ORDER BY months.month;
 -- 2.3 
 SELECT
     payment_id,
-    amount,
+    ROUND(amount, 1),
     payment_date,
     payment_method
 FROM payments
